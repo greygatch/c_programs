@@ -12,11 +12,10 @@ Encrypts user string with user keyword.
 #include <ctype.h>
 #include <cs50.h>
  
-int main(int argc, string argv[])
-{
+int main(int argc, string argv[]) {
+
     // key must be entered at command line. 
-    if (argc != 2)
-    {
+    if (argc != 2) {
         printf("Error: \n");
         return 1;
     }            
@@ -24,43 +23,36 @@ int main(int argc, string argv[])
     int keylength = strlen(key);
     
     // run through key, make sure everything is alphabetical.
-    for (int c = 0, n = keylength; c < n; c++)
-    {  
-        if (!isalpha(key[c]))
-        {
+    for (int c = 0, n = keylength; c < n; c++) {  
+        if (!isalpha(key[c])) {
             printf("Error: \n");
             return 1;
         }
     }
-    
     // get string for encryption.
     string s = GetString();
     int cipher;       
                                     
-    for (int i = 0, j = 0; i < strlen(s); i++)
-    {   
+    for (int i = 0, j = 0; i < strlen(s); i++) {
+    
         // if string value is alphabetical...                 
-        if (isalpha(s[i]))
-        {
+        if (isalpha(s[i])) {
+        
             // reset key to beginning.
-            if (j >= keylength)
-            {
+            if (j >= keylength) {
                 j = 0;
             }
                 
-            if(islower(key[j]))
-            {
+            if(islower(key[j])) {
                 key[j] = key[j] - 97;
             }
                 
-            if(isupper(key[j]))
-            {
+            if(isupper(key[j])) {
                 key[j]= key[j] - 65;
             }
             
             // modulo to keep encrypted string within LC alphabet.
-            if (islower(s[i]))
-            {
+            if (islower(s[i])) {
                 cipher = (s[i] + key[j]);
                 cipher = (((cipher - 97) % 26) + 97);
                 printf("%c", cipher);
@@ -68,8 +60,7 @@ int main(int argc, string argv[])
             }
             
             // modulo to keep encrypted string within UC alphabet.
-            else
-            {
+            else {
                 cipher = (s[i] + key[j]);
                 cipher = (((cipher - 65) % 26) + 65);
                 printf("%c", cipher);
@@ -78,8 +69,7 @@ int main(int argc, string argv[])
         }
         
         // if not alphabetical, just print.            
-        else
-        {
+        else {
             printf("%c", s[i]);
         }
     }
